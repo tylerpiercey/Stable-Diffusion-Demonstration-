@@ -1,11 +1,20 @@
+<<<<<<< HEAD
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
+=======
+import React, {useState, useEffect} from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ControlPanel from './components/ControlPanel'
+>>>>>>> 658eee91e5531fcd051a65362e4e138b948230f1
 
 function App() {
   Const [textPrompt, setTextPrompt] = usestate('');
   const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
   return (
+<<<<<<< HEAD
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -36,6 +45,15 @@ function App() {
         </a>
       </header>
     </div>
+=======
+  <Container> 
+    <Router>
+      <Routes>
+        <Route path='/*' element={<ControlPanel />} />
+      </Routes>  
+    </Router>
+  </Container>  
+>>>>>>> 658eee91e5531fcd051a65362e4e138b948230f1
   );
 }
 
