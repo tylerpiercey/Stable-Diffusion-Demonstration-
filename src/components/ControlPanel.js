@@ -15,7 +15,7 @@ function ControlPanel() {
         <Form.Select aria-label='Select'>
             <option>Select Image Generation Model:</option>
             <option value="1" >StableDiffusion</option>
-            <option value="2">Midjourney</option>
+            <option value="midjourney">Midjourney</option>
             <option value="3">Dall-E 3.0</option>
         </Form.Select>
 
@@ -24,7 +24,7 @@ function ControlPanel() {
           <Form.Label>Text Prompt</Form.Label>
           <Form.Control 
             type="text" 
-            placeholder="Enter text prompt" 
+            placeholder="Enter text prompt"
             value={textPrompt}
             onChange={(e) => setTextPrompt(e.target.value)}
           />
@@ -46,10 +46,12 @@ function ControlPanel() {
   );
     async function getData() {
         console.log("test")
+        console.log(textPrompt)
+        console.log(negativeTextPrompt)
         let data = JSON.stringify({
             "key": process.env.REACT_APP_API_KEY,
             "model_id": "midjourney",
-            "prompt": "Tombstone",
+            "prompt": "check",
             "negative_prompt": "blue",
             "width": "512",
             "height": "512",
