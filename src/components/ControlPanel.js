@@ -1,6 +1,7 @@
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import axios from "axios";
 
 
 function ControlPanel() {
@@ -43,5 +44,49 @@ function ControlPanel() {
     </Container>
   );
 }
+let data = JSON.stringify({
+    "key": "CNsyFcLinJ2xL1PVt9xOQoJuuyc0kWgDROS6fihjNmFCYjKZWnwxvbimvuMP",
+    "model_id": "midjourney",
+    "prompt": "Tombstone",
+    "negative_prompt": "blue",
+    "width": "512",
+    "height": "512",
+    "samples": "4",
+    "safety_checker": "no",
+    "num_inference_steps": "30",
+    "enhance_prompt": "yes",
+    "scheduler": "UniPCMultistepScheduler",
+    "seed": null,
+    "guidance_scale": 7.5,
+    "webhook": null,
+    "track_id": null,
+    "tomesd": "yes",
+    "multi_lingual": "no",
+    "use_karras_sigmas": "yes",
+    "upscale": "no",
+    "vae": null,
+    "lora_model": null,
+    "lora_strength": null,
+    "embeddings_model": null,
+    "clip_skip": 2
+});
+
+let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://stablediffusionapi.com/api/v4/dreambooth',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    data : data
+};
+
+axios.request(config)
+    .then((response) => {
+        console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 export default ControlPanel;
