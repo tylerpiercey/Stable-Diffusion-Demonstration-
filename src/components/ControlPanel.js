@@ -7,6 +7,7 @@ import axios from "axios";
 function ControlPanel() {
   const [textPrompt, setTextPrompt] = useState('');
   const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
+  const [generatedImageUrl, setGeneratedImageUrl] = useState('');
 
   return (
     <Container>
@@ -42,6 +43,7 @@ function ControlPanel() {
         </Form.Group>
       </Form.Group>
         <input type="submit" value="submit" onClick={getData}/>
+        <img src={generatedImageUrl} />
     </Container>
   );
     async function getData() {
@@ -51,12 +53,12 @@ function ControlPanel() {
         let data = JSON.stringify({
             "key": process.env.REACT_APP_API_KEY,
             "model_id": "midjourney",
-            "prompt": "check",
+            "prompt": textPrompt,
             "negative_prompt": "blue",
             "width": "512",
             "height": "512",
-            "samples": "4",
-            "safety_checker": "no",
+            "samples": "1",
+            "safety_checker": "yes",
             "num_inference_steps": "30",
             "enhance_prompt": "yes",
             "scheduler": "UniPCMultistepScheduler",
@@ -87,7 +89,8 @@ function ControlPanel() {
 
         axios.request(config)
             .then((response) => {
-                console.log((response.data.proxy_links));
+                console.log((response.data.proxy_links[0]));
+                setGeneratedImageUrl(response.data.proxy_links[0])
             })
             .catch((error) => {
                 console.log(error);
