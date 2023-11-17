@@ -54,7 +54,7 @@ function ControlPanel() {
             "key": process.env.REACT_APP_API_KEY,
             "model_id": "midjourney",
             "prompt": textPrompt,
-            "negative_prompt": "blue",
+            "negative_prompt": negativeTextPrompt,
             "width": "512",
             "height": "512",
             "samples": "1",
