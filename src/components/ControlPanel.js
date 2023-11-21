@@ -1,66 +1,100 @@
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import {Form, Button, Container, Row, Col} from 'react-bootstrap';
+import React, {useState, useEffect} from 'react';
+import {Routes, Route} from 'react-router-dom';
 import axios from "axios";
 
 
 function ControlPanel() {
-  const [textPrompt, setTextPrompt] = useState('');
-  const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
-  const [generatedImageUrl, setGeneratedImageUrl] = useState('');
+    const [textPrompt, setTextPrompt] = useState('');
+    const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
+    const [generatedImageUrl, setGeneratedImageUrl] = useState('');
+    const [imageSize, setImageSize] = useState('');
+    const [enhancePrompt, setEnhancedPrompt] = useState()
+    const [futureLink, setFutureLink] = useState()
+    const [seed,setSeed] = useState()
+    const [inferenceSteps, setInferenceSteps] = useState()
+    const [modelId, setModelId] = useState()
 
-  return (
-    <Container>
-      <Form.Group data-bs-theme="dark">  
-        <Form.Label>Control Panel</Form.Label>    
-        <Form.Select aria-label='Select'>
-            <option>Select Image Generation Model:</option>
-            <option value="1" >StableDiffusion</option>
-            <option value="midjourney">Midjourney</option>
-            <option value="3">Dall-E 3.0</option>
-        </Form.Select>
+    return (
+        <Container>
+            <Form.Group data-bs-theme="dark">
+                <Form.Label>Rendering Model</Form.Label>
+                <Form.Select aria-label='Select' onChange={(e) => setModelId(e.target.value)}>
+                    <option>Select Image Generation Model:</option>
+                    <option value="midjourney">Midjourney</option>
+                    <option value="anything-v3">Anything V3</option>
+                    <option value="wifu-diffusion">Wifu Diffusion</option>
 
-        {/* Text Prompt Input */}
-        <Form.Group className="mb-3">
-          <Form.Label>Text Prompt</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Enter text prompt"
-            value={textPrompt}
-            onChange={(e) => setTextPrompt(e.target.value)}
-          />
-        </Form.Group>
 
-        {/* Negative Text Prompt Input */}
-        <Form.Group className="mb-3">
-          <Form.Label>Negative Text Prompt</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Enter negative text prompt" 
-            value={negativeTextPrompt}
-            onChange={(e) => setNegativeTextPrompt(e.target.value)}
-          />
-        </Form.Group>
-      </Form.Group>
-        <input type="submit" value="submit" onClick={getData}/>
-        <img src={generatedImageUrl} />
-    </Container>
-  );
+                </Form.Select>
+
+                {/* Text Prompt Input */}
+                <Form.Group className="mb-3">
+                    <Form.Label>Text Prompt</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter text prompt"
+                        value={textPrompt}
+                        onChange={(e) => setTextPrompt(e.target.value)}
+                    />
+                </Form.Group>
+
+                {/* Negative Text Prompt Input */}
+                <Form.Group className="mb-3">
+                    <Form.Label>Negative Text Prompt</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter negative text prompt"
+                        value={negativeTextPrompt}
+                        onChange={(e) => setNegativeTextPrompt(e.target.value)}
+                    />
+                    {/* Image Width */}
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Set Image Size</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter Image Size"
+                        value={imageSize}
+                        onChange={(e) => setImageSize(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Label>Enhance Prompt</Form.Label>
+                <Form.Select aria-label='Select'
+                             onChange={(e) => setEnhancedPrompt(e.target.value)}>
+                    <option>Adds extra text to increase image generation</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+
+                </Form.Select>
+
+            </Form.Group>
+            <br/>
+            <input type="submit" value="submit" onClick={getData}/>
+            <br/>
+            <img src={generatedImageUrl}/>
+            <p >{futureLink}</p>
+        </Container>
+    );
+
     async function getData() {
         console.log("test")
         console.log(textPrompt)
         console.log(negativeTextPrompt)
+        console.log(modelId)
+        console.log(enhancePrompt)
         let data = JSON.stringify({
             "key": process.env.REACT_APP_API_KEY,
             "model_id": "midjourney",
             "prompt": textPrompt,
             "negative_prompt": negativeTextPrompt,
-            "width": "512",
-            "height": "512",
+            "width":  imageSize,
+            "height": imageSize,
             "samples": "1",
             "safety_checker": "yes",
             "num_inference_steps": "30",
-            "enhance_prompt": "yes",
+            "enhance_prompt": enhancePrompt,
             "scheduler": "UniPCMultistepScheduler",
             "seed": null,
             "guidance_scale": 7.5,
@@ -89,12 +123,18 @@ function ControlPanel() {
 
         axios.request(config)
             .then((response) => {
-                console.log((response.data.proxy_links[0]));
-                setGeneratedImageUrl(response.data.proxy_links[0])
+                console.log((response.data));
+                if (response.data.status === "success") {
+                    setGeneratedImageUrl(response.data.proxy_links)
+                }
+                else {
+                    setFutureLink(response.data.future_links)
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 }
+
 export default ControlPanel;
