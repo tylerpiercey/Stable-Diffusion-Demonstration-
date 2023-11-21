@@ -10,6 +10,7 @@ function ControlPanel() {
     const [generatedImageUrl, setGeneratedImageUrl] = useState('');
     const [imageSize, setImageSize] = useState('');
     const [enhancePrompt, setEnhancedPrompt] = useState()
+    const [futureLink, setFutureLink] = useState()
 
     return (
         <Container>
@@ -67,6 +68,7 @@ function ControlPanel() {
             <input type="submit" value="submit" onClick={getData}/>
             <br/>
             <img src={generatedImageUrl}/>
+            <p >{futureLink}</p>
         </Container>
     );
 
@@ -84,7 +86,7 @@ function ControlPanel() {
             "samples": "1",
             "safety_checker": "yes",
             "num_inference_steps": "30",
-            "enhance_prompt": "yes",
+            "enhance_prompt": enhancePrompt,
             "scheduler": "UniPCMultistepScheduler",
             "seed": null,
             "guidance_scale": 7.5,
@@ -113,9 +115,14 @@ function ControlPanel() {
 
         axios.request(config)
             .then((response) => {
-                // console.log(enhancePrompt)
+                console.log(enhancePrompt)
                 console.log((response.data));
-                setGeneratedImageUrl(response.data.proxy_links)
+                if (response.data.status === "success") {
+                    setGeneratedImageUrl(response.data.proxy_links)
+                }
+                else {
+                    setFutureLink(response.data.future_links)
+                }
             })
             .catch((error) => {
                 console.log(error);
