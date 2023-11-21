@@ -11,6 +11,9 @@ function ControlPanel() {
     const [imageSize, setImageSize] = useState('');
     const [enhancePrompt, setEnhancedPrompt] = useState()
     const [futureLink, setFutureLink] = useState()
+    const [seed,setSeed] = useState()
+    const [inferenceSteps, setInferenceSteps] = useState()
+    const [modelId, setModelId] = useState()
 
     return (
         <Container>
