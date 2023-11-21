@@ -20,6 +20,7 @@ function ControlPanel() {
                     <option value="1">StableDiffusion</option>
                     <option value="midjourney">Midjourney</option>
                     <option value="3">Dall-E 3.0</option>
+                    onChange={(e) => setEnhancedPrompt(e.target.value)}
                 </Form.Select>
 
                 {/* Text Prompt Input */}
@@ -54,14 +55,15 @@ function ControlPanel() {
                     />
                 </Form.Group>
 
-                <Form.Label>Control Panel</Form.Label>
+                <Form.Label>Enhance Prompt</Form.Label>
                 <Form.Select aria-label='Select'>
-                    <option>Select Image Generation Model:</option>
+                    <option>Adds extra text to increase image generation</option>
                     <option value="no">No</option>
                     <option value="yes">Yes</option>
                 </Form.Select>
 
             </Form.Group>
+            <br/>
             <input type="submit" value="submit" onClick={getData}/>
             <br/>
             <img src={generatedImageUrl}/>
@@ -111,7 +113,8 @@ function ControlPanel() {
 
         axios.request(config)
             .then((response) => {
-                console.log((response.data.proxy_links));
+                // console.log(enhancePrompt)
+                console.log((response.data));
                 setGeneratedImageUrl(response.data.proxy_links)
             })
             .catch((error) => {
