@@ -8,12 +8,16 @@ function ControlPanel() {
     const [textPrompt, setTextPrompt] = useState('');
     const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
     const [generatedImageUrl, setGeneratedImageUrl] = useState('');
-    const [imageSize, setImageSize] = useState('');
     const [enhancePrompt, setEnhancedPrompt] = useState()
     const [futureLink, setFutureLink] = useState()
     const [seed,setSeed] = useState()
     const [inferenceSteps, setInferenceSteps] = useState()
     const [modelId, setModelId] = useState()
+    const [imageHeight, setImageHeight] = useState(512);
+    const [imageWidth, setImageWidth] = useState(512);
+    const [batchCount, setBatchCount] = useState(1);
+    const [batchSize, setBatchSize] = useState(1);
+    const [cfgScale, setCfgScale] = useState(7.5);
 
     return (
         <Container>
@@ -24,8 +28,6 @@ function ControlPanel() {
                     <option value="midjourney">Midjourney</option>
                     <option value="anything-v3">Anything V3</option>
                     <option value="wifu-diffusion">Wifu Diffusion</option>
-
-
                 </Form.Select>
 
                 {/* Text Prompt Input */}
@@ -48,15 +50,64 @@ function ControlPanel() {
                         value={negativeTextPrompt}
                         onChange={(e) => setNegativeTextPrompt(e.target.value)}
                     />
-                    {/* Image Width */}
+                </Form.Group>
+
+                {/* Sliders for Image Height & Width */}
+                <Form.Group className="mb-3">
+                    <Form.Label>Image Height: {imageHeight}px</Form.Label>
+                    <Form.Control
+                        type="range"
+                        value={imageHeight}
+                        onChange={(e) => setImageHeight(e.target.value)}
+                        min={256}
+                        max={512}
+                    />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>Set Image Size</Form.Label>
+                    <Form.Label>Image Width: {imageWidth}px</Form.Label>
                     <Form.Control
-                        type="text"
-                        placeholder="Enter Image Size"
-                        value={imageSize}
-                        onChange={(e) => setImageSize(e.target.value)}
+                        type="range"
+                        value={imageWidth}
+                        onChange={(e) => setImageWidth(e.target.value)}
+                        min={256}
+                        max={512}
+                    />
+                </Form.Group>
+
+                {/* Slider for Batch Count */}
+                <Form.Group className="mb-3">
+                    <Form.Label>Batch Count: {batchCount}</Form.Label>
+                    <Form.Control
+                        type="range"
+                        value={batchCount}
+                        onChange={(e) => setBatchCount(e.target.value)}
+                        min={1}
+                        max={10}
+                    />
+                </Form.Group>
+
+                {/* Slider for Batch Size */}
+                <Form.Group className="mb-3">
+                    <Form.Label>Batch Size: {batchSize}</Form.Label>
+                    <Form.Control
+                        type="range"
+                        value={batchSize}
+                        onChange={(e) => setBatchSize(e.target.value)}
+                        min={1}
+                        max={5}
+                    />
+                </Form.Group>
+
+                {/* Slider for CFG Scale */}
+                <Form.Group className="mb-3">
+                    <Form.Label>CFG Scale: {cfgScale}</Form.Label>
+                    <Form.Control
+                        type="range"
+                        value={cfgScale}
+                        onChange={(e) => setCfgScale(e.target.value)}
+                        min={1}
+                        max={20}
+                        step={0.1}
                     />
                 </Form.Group>
 
@@ -66,7 +117,6 @@ function ControlPanel() {
                     <option>Adds extra text to increase image generation</option>
                     <option value="no">No</option>
                     <option value="yes">Yes</option>
-
                 </Form.Select>
 
             </Form.Group>
@@ -89,8 +139,10 @@ function ControlPanel() {
             "model_id": "midjourney",
             "prompt": textPrompt,
             "negative_prompt": negativeTextPrompt,
-            "width":  imageSize,
-            "height": imageSize,
+            "width":  imageWidth,
+            "height": imageHeight,
+            "batch_count": batchCount,
+            "cfg_scale": cfgScale,
             "samples": "1",
             "safety_checker": "yes",
             "num_inference_steps": "30",
