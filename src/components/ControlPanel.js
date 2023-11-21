@@ -1,51 +1,73 @@
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import {Form, Button, Container, Row, Col} from 'react-bootstrap';
+import React, {useState, useEffect} from 'react';
+import {Routes, Route} from 'react-router-dom';
 import axios from "axios";
 
 
 function ControlPanel() {
-  const [textPrompt, setTextPrompt] = useState('');
-  const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
-  const [generatedImageUrl, setGeneratedImageUrl] = useState('');
+    const [textPrompt, setTextPrompt] = useState('');
+    const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
+    const [generatedImageUrl, setGeneratedImageUrl] = useState('');
+    const [imageSize, setImageSize] = useState('');
+    const [enhancePrompt, setEnhancedPrompt] = useState()
 
-  return (
-    <Container>
-      <Form.Group data-bs-theme="dark">  
-        <Form.Label>Control Panel</Form.Label>    
-        <Form.Select aria-label='Select'>
-            <option>Select Image Generation Model:</option>
-            <option value="1" >StableDiffusion</option>
-            <option value="midjourney">Midjourney</option>
-            <option value="3">Dall-E 3.0</option>
-        </Form.Select>
+    return (
+        <Container>
+            <Form.Group data-bs-theme="dark">
+                <Form.Label>Control Panel</Form.Label>
+                <Form.Select aria-label='Select'>
+                    <option>Select Image Generation Model:</option>
+                    <option value="1">StableDiffusion</option>
+                    <option value="midjourney">Midjourney</option>
+                    <option value="3">Dall-E 3.0</option>
+                </Form.Select>
 
-        {/* Text Prompt Input */}
-        <Form.Group className="mb-3">
-          <Form.Label>Text Prompt</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Enter text prompt"
-            value={textPrompt}
-            onChange={(e) => setTextPrompt(e.target.value)}
-          />
-        </Form.Group>
+                {/* Text Prompt Input */}
+                <Form.Group className="mb-3">
+                    <Form.Label>Text Prompt</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter text prompt"
+                        value={textPrompt}
+                        onChange={(e) => setTextPrompt(e.target.value)}
+                    />
+                </Form.Group>
 
-        {/* Negative Text Prompt Input */}
-        <Form.Group className="mb-3">
-          <Form.Label>Negative Text Prompt</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Enter negative text prompt" 
-            value={negativeTextPrompt}
-            onChange={(e) => setNegativeTextPrompt(e.target.value)}
-          />
-        </Form.Group>
-      </Form.Group>
-        <input type="submit" value="submit" onClick={getData}/>
-        <img src={generatedImageUrl} />
-    </Container>
-  );
+                {/* Negative Text Prompt Input */}
+                <Form.Group className="mb-3">
+                    <Form.Label>Negative Text Prompt</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter negative text prompt"
+                        value={negativeTextPrompt}
+                        onChange={(e) => setNegativeTextPrompt(e.target.value)}
+                    />
+                    {/* Image Width */}
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Set Image Size</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter Image Size"
+                        value={imageSize}
+                        onChange={(e) => setImageSize(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Label>Control Panel</Form.Label>
+                <Form.Select aria-label='Select'>
+                    <option>Select Image Generation Model:</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </Form.Select>
+
+            </Form.Group>
+            <input type="submit" value="submit" onClick={getData}/>
+            <br/>
+            <img src={generatedImageUrl}/>
+        </Container>
+    );
+
     async function getData() {
         console.log("test")
         console.log(textPrompt)
@@ -55,8 +77,8 @@ function ControlPanel() {
             "model_id": "midjourney",
             "prompt": textPrompt,
             "negative_prompt": negativeTextPrompt,
-            "width": "512",
-            "height": "512",
+            "width":  imageSize,
+            "height": imageSize,
             "samples": "1",
             "safety_checker": "yes",
             "num_inference_steps": "30",
@@ -89,12 +111,13 @@ function ControlPanel() {
 
         axios.request(config)
             .then((response) => {
-                console.log((response.data.proxy_links[0]));
-                setGeneratedImageUrl(response.data.proxy_links[0])
+                console.log((response.data.proxy_links));
+                setGeneratedImageUrl(response.data.proxy_links)
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 }
+
 export default ControlPanel;
