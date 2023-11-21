@@ -18,13 +18,14 @@ function ControlPanel() {
     return (
         <Container>
             <Form.Group data-bs-theme="dark">
-                <Form.Label>Control Panel</Form.Label>
-                <Form.Select aria-label='Select'>
+                <Form.Label>Rendering Model</Form.Label>
+                <Form.Select aria-label='Select' onChange={(e) => setModelId(e.target.value)}>
                     <option>Select Image Generation Model:</option>
-                    <option value="1">StableDiffusion</option>
                     <option value="midjourney">Midjourney</option>
-                    <option value="3">Dall-E 3.0</option>
-                    onChange={(e) => setEnhancedPrompt(e.target.value)}
+                    <option value="anything-v3">Anything V3</option>
+                    <option value="wifu-diffusion">Wifu Diffusion</option>
+
+
                 </Form.Select>
 
                 {/* Text Prompt Input */}
@@ -60,10 +61,12 @@ function ControlPanel() {
                 </Form.Group>
 
                 <Form.Label>Enhance Prompt</Form.Label>
-                <Form.Select aria-label='Select'>
+                <Form.Select aria-label='Select'
+                             onChange={(e) => setEnhancedPrompt(e.target.value)}>
                     <option>Adds extra text to increase image generation</option>
                     <option value="no">No</option>
                     <option value="yes">Yes</option>
+
                 </Form.Select>
 
             </Form.Group>
@@ -79,6 +82,8 @@ function ControlPanel() {
         console.log("test")
         console.log(textPrompt)
         console.log(negativeTextPrompt)
+        console.log(modelId)
+        console.log(enhancePrompt)
         let data = JSON.stringify({
             "key": process.env.REACT_APP_API_KEY,
             "model_id": "midjourney",
@@ -118,7 +123,6 @@ function ControlPanel() {
 
         axios.request(config)
             .then((response) => {
-                console.log(enhancePrompt)
                 console.log((response.data));
                 if (response.data.status === "success") {
                     setGeneratedImageUrl(response.data.proxy_links)
