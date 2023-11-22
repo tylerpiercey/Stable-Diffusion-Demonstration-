@@ -61,6 +61,7 @@ function ControlPanel() {
                         onChange={(e) => setImageHeight(e.target.value)}
                         min={256}
                         max={512}
+                        step={8}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -71,6 +72,7 @@ function ControlPanel() {
                         onChange={(e) => setImageWidth(e.target.value)}
                         min={256}
                         max={512}
+                        step={8}
                     />
                 </Form.Group>
 
@@ -139,7 +141,7 @@ function ControlPanel() {
             "model_id": "midjourney",
             "prompt": textPrompt,
             "negative_prompt": negativeTextPrompt,
-            "width":  imageWidth,
+            "width": imageWidth,
             "height": imageHeight,
             "batch_count": batchCount,
             "cfg_scale": cfgScale,
