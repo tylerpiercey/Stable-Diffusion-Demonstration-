@@ -5,6 +5,7 @@ import res from "express/lib/response.js";
 
 
 const app = express()
+app.use(express.json())
 const port = 3000
 
 app.get("/hello", (req, res) => {
