@@ -1,10 +1,17 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import { MongoClient } from 'mongodb';
-import { fileURLToPath } from 'url';
-import path from 'path';
 import 'dotenv/config';
+import req from "express/lib/request.js";
+import res from "express/lib/response.js";
 
 
 const app = express()
-const port = 4000;
+app.use(express.json())
+const port = 3000
+
+app.get("/hello", (req, res) => {
+    res.send('hello')
+})
+
+app.listen(port, () =>{
+    console.log('Server is listening')
+})

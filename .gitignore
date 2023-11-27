@@ -1,4 +1,7 @@
-node_modules
+/Backend/node_modules
+/Backend/Data
+/Frontend/node_modules
 /.idea/workspace.xml
+Frontend/.env
 /.env
 .env
