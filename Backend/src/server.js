@@ -9,10 +9,6 @@ const app = express()
 app.use(express.json())
 const port = 3000
 
-app.get("/hello", (req, res) => {
-    res.send('hello')
-})
-
 app.get('/api/images', async (req,res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017')
     await client.connect()
