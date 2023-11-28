@@ -5,3 +5,6 @@
 Frontend/.env
 /.env
 .env
+/Backend/.idea/Backend.iml
+/Backend/.idea/modules.xml
+/Backend/.idea/vcs.xml
