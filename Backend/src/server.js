@@ -1,7 +1,7 @@
 import express, {response} from 'express';
-// import 'dotenv/config';
-// import req from "express/lib/request.js";
-// import res from "express/lib/response.js";
+import 'dotenv/config';
+import req from "express/lib/request.js";
+import res from "express/lib/response.js";
 import {MongoClient} from "mongodb";
 
 
