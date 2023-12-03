@@ -15,16 +15,11 @@ function App() {
     <Router>
       <NavigationBar />
       <div className="app-content"> 
-        {/* Pass the setter functions as props to ControlPanel */}
         <ControlPanel setGeneratedImageUrl={setGeneratedImageUrl} setFutureLink={setFutureLink} />
-        {/* Pass the state as props to ImageDisplay */}
         <ImageDisplay generatedImageUrl={generatedImageUrl} futureLink={futureLink} /> 
       </div>
-      {/* ... rest of your routes and container */}
     </Router>
   );
 }
-
-
 
 export default App;
