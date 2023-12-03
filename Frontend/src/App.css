@@ -61,12 +61,19 @@ input {
   display: flex;
   flex-direction: column;
   flex: 1;
+  max-width: 50%;
 }
 
 @media (max-width: 768px) {
   .app-content {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
+body {
+  background-color: #38cbd6; 
+  margin: 0;
+  padding: 0;
+  
+}
 

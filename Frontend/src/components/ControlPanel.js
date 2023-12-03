@@ -5,6 +5,7 @@ import axios from "axios";
 import './ControlPanel.css';
 import ImageDisplay from './ImageDisplay';
 
+
 function ControlPanel({ setGeneratedImageUrl, setFutureLink }) {
     const [textPrompt, setTextPrompt] = useState('');
     const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
@@ -177,10 +178,8 @@ function ControlPanel({ setGeneratedImageUrl, setFutureLink }) {
         .then((response) => {
             console.log(response.data);
             if (response.data.status === "success") {
-                // Use the function from props to update the App's state
                 setGeneratedImageUrl(response.data.proxy_links);
             } else {
-                // Use the function from props to update the App's state
                 setFutureLink(response.data.future_links);
             }
         })
