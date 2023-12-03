@@ -124,7 +124,8 @@ function ControlPanel({ setGeneratedImageUrl, setFutureLink }) {
 
             </Form.Group>
             <br/>
-            <input type="submit" value="submit" onClick={getData}/>
+            <input type="submit" value="submit" onClick={getData} className="submit-button"/>
+
             <br/>
         </Container>
     );
@@ -136,7 +137,7 @@ function ControlPanel({ setGeneratedImageUrl, setFutureLink }) {
         console.log(modelId)
         console.log(enhancePrompt)
         let data = JSON.stringify({
-            "key": process.env.REACT_APP_API_KEY,
+            "key": process.env.REACT_APP_API_KEY ,
             "model_id": "midjourney",
             "prompt": textPrompt,
             "negative_prompt": negativeTextPrompt,
