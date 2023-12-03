@@ -6,7 +6,7 @@ import './NavigationBar.css';
 const NavigationBar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
-      <Navbar.Brand href="#home">DiffusionDynamics</Navbar.Brand>
+      <Navbar.Brand as={NavLink} to="/">DiffusionDynamics</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">

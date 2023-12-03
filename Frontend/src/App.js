@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,10 +14,16 @@ function App() {
   return (
     <Router>
       <NavigationBar />
-      <div className="app-content"> 
-        <ControlPanel setGeneratedImageUrl={setGeneratedImageUrl} setFutureLink={setFutureLink} />
-        <ImageDisplay generatedImageUrl={generatedImageUrl} futureLink={futureLink} /> 
-      </div>
+      <Routes>
+        <Route path="/" element={
+          <div className="app-content">
+            <ControlPanel setGeneratedImageUrl={setGeneratedImageUrl} setFutureLink={setFutureLink} />
+            <ImageDisplay generatedImageUrl={generatedImageUrl} futureLink={futureLink} />
+          </div>
+        } />
+        <Route path="/view-generated-images" element={<ViewGeneratedImages />} />
+        {/* Define other routes as needed */}
+      </Routes>
     </Router>
   );
 }

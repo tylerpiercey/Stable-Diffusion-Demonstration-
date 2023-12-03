@@ -1,0 +1,41 @@
+.images-header {
+    width: 95%; /* Full width */
+    text-align: center;
+    margin-bottom: 20px; /* Space below the header */
+  }
+  
+  .images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 20px; /* Padding inside the grid */
+    width: 95%; /* Full width of its parent container */
+    min-height: 500px; /* Minimum height to make it visible even when empty */
+    background-color: #0056b3; /* Background color */
+    border: 1px solid black; /* Border */
+    border-radius: 20px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+  }
+  
+  .image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .image-item img:hover {
+    transform: scale(1.05); 
+  }
+  
+  
+  .images-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%; /* Fill the width */
+    min-height: calc(100vh - 70px); /* Adjust if there's a navbar with a height, for example, 70px */
+    padding-top: 20px; /* You can adjust this as needed */
+    gap: 20px; /* Space between header and grid if needed */
+  }
+  
