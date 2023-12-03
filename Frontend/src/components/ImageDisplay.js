@@ -1,11 +1,11 @@
 import React from 'react';
-import './ImageDisplay.css'; 
+import './ImageDisplay.css';
 
-const ImageDisplay = () => {
+const ImageDisplay = ({ generatedImageUrl, futureLink }) => {
   return (
     <div className="image-display">
-      {/* Placeholder for generated images */}
-      <p>Generated images will be displayed here</p>
+      {generatedImageUrl && <img src={generatedImageUrl} alt="Generated Content" />}
+      {futureLink && <p>{futureLink}</p>}
     </div>
   );
 };

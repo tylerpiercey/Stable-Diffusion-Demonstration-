@@ -1,0 +1,40 @@
+.control-panel-container {
+  background-color: #0056b3;
+  padding: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%; 
+}
+
+.form-control, .form-select {
+  width: 80%; 
+  margin: 0 auto; 
+}
+
+.image-display {
+  border: 1px solid #ccc;
+  min-height: 500px;
+  background-color: #e6e6fa; 
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.submit-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 80%; 
+  margin: 10px auto; 
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}

@@ -13,9 +13,6 @@ const NavigationBar = () => {
           <Nav.Link as={NavLink} to="/" exact>
             Home
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/advanced-settings">
-            Advanced Settings
-          </Nav.Link>
           <Nav.Link as={NavLink} to="/view-generated-images">
             View Generated Images
           </Nav.Link>
