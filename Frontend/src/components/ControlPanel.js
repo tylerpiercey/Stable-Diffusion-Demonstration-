@@ -2,14 +2,13 @@ import {Form, Button, Container, Row, Col} from 'react-bootstrap';
 import React, {useState, useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import axios from "axios";
+import './ControlPanel.css';
+import ImageDisplay from './ImageDisplay';
 
-
-function ControlPanel() {
+function ControlPanel({ setGeneratedImageUrl, setFutureLink }) {
     const [textPrompt, setTextPrompt] = useState('');
     const [negativeTextPrompt, setNegativeTextPrompt] = useState('');
-    const [generatedImageUrl, setGeneratedImageUrl] = useState('');
     const [enhancePrompt, setEnhancedPrompt] = useState()
-    const [futureLink, setFutureLink] = useState()
     const [seed,setSeed] = useState()
     const [inferenceSteps, setInferenceSteps] = useState()
     const [modelId, setModelId] = useState()
@@ -18,9 +17,10 @@ function ControlPanel() {
     const [batchCount, setBatchCount] = useState(1);
     const [batchSize, setBatchSize] = useState(1);
     const [cfgScale, setCfgScale] = useState(7.5);
+    
 
     return (
-        <Container>
+        <Container className="control-panel-container">
             <Form.Group data-bs-theme="dark">
                 <Form.Label>Rendering Model</Form.Label>
                 <Form.Select aria-label='Select' onChange={(e) => setModelId(e.target.value)}>
@@ -125,8 +125,6 @@ function ControlPanel() {
             <br/>
             <input type="submit" value="submit" onClick={getData}/>
             <br/>
-            <img src={generatedImageUrl}/>
-            <p >{futureLink}</p>
         </Container>
     );
 
@@ -176,18 +174,19 @@ function ControlPanel() {
         };
 
         axios.request(config)
-            .then((response) => {
-                console.log((response.data));
-                if (response.data.status === "success") {
-                    setGeneratedImageUrl(response.data.proxy_links)
-                }
-                else {
-                    setFutureLink(response.data.future_links)
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        .then((response) => {
+            console.log(response.data);
+            if (response.data.status === "success") {
+                // Use the function from props to update the App's state
+                setGeneratedImageUrl(response.data.proxy_links);
+            } else {
+                // Use the function from props to update the App's state
+                setFutureLink(response.data.future_links);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 }
 

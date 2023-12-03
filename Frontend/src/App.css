@@ -44,13 +44,29 @@ input {
 }
 
 .app-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr; 
-  gap: 1rem; 
+  display: flex; 
+  justify-content: center; 
+  align-items: start; 
+  gap: 20px; 
+  padding: 20px; 
+}
+
+.app-content > * {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%; 
+}
+
+.ControlPanel, .ImageDisplay {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 @media (max-width: 768px) {
   .app-content {
-    grid-template-columns: 1fr; 
+    flex-direction: column;
   }
 }
+
+
