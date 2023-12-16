@@ -7,7 +7,7 @@ const ViewGeneratedImages = () => {
   useEffect(() => {
     const fetchSavedImages = async () => {
       try {
-        const response = await fetch('http://localhost:3001/images'); // Adjust this URL to your server
+        const response = await fetch('http://localhost:3001/api/images'); // Adjust this URL to your server
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
