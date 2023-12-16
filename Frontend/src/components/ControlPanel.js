@@ -137,7 +137,7 @@ function ControlPanel({ setGeneratedImageUrl, setFutureLink }) {
         console.log(modelId)
         console.log(enhancePrompt)
         let data = JSON.stringify({
-            "key": process.env.REACT_APP_API_KEY ,
+            "key": "CNsyFcLinJ2xL1PVt9xOQoJuuyc0kWgDROS6fihjNmFCYjKZWnwxvbimvuMP",
             "model_id": "midjourney",
             "prompt": textPrompt,
             "negative_prompt": negativeTextPrompt,

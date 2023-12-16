@@ -7,7 +7,7 @@ import {MongoClient} from "mongodb";
 
 const app = express()
 app.use(express.json())
-const port = 3000
+const port = 3001
 
 app.get('/api/images', async (req,res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017')
