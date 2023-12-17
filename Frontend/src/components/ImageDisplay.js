@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ImageDisplay.css';
 
 const ImageDisplay = ({ generatedImageUrl, futureLink }) => {
-  const onSave = async(imageUrl) => {
+  const [loading, setLoading] = useState(false);
+  const [finalImageUrl, setFinalImageUrl] = useState(generatedImageUrl);
+
+  useEffect(() => {
+    if (futureLink) {
+      setLoading(true);
+      setFinalImageUrl(futureLink);
+      setLoading(false);
+    }
+  }, [futureLink]);
+
+  const onSave = async (imageUrl) => {
     try {
       const response = await fetch('http://localhost:3001/api/saveimage/', {
         method: 'POST',
@@ -21,17 +32,23 @@ const ImageDisplay = ({ generatedImageUrl, futureLink }) => {
       console.error('Error saving image:', error);
     }
   };
+
   return (
     <div className="image-display">
-      {generatedImageUrl && (
+      {loading ? (
+        <p>Loading image...</p>
+      ) : finalImageUrl ? (
         <>
-          <img src={generatedImageUrl} alt="Generated Content" />
-          <button onClick={() => onSave(generatedImageUrl)}>Save to image Collection</button>
+          <img src={finalImageUrl} alt="Generated Content" />
+          <button onClick={() => onSave(finalImageUrl)}>Save to Image Collection</button>
         </>
+      ) : (
+        <p>Image not available</p>
       )}
-      {futureLink}
     </div>
   );
 };
 
 export default ImageDisplay;
+
+

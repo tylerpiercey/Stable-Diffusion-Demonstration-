@@ -12,7 +12,7 @@ const ViewGeneratedImages = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setImageUrls(data.map(img => img.url)); 
+        setImageUrls(data.map(img => img.imagelink)); 
       } catch (error) {
         console.log(error);
       }
@@ -28,9 +28,9 @@ const ViewGeneratedImages = () => {
       </div>
       <div className="images-grid">
         {imageUrls.length > 0 ? (
-          imageUrls.map((url, index) => (
+          imageUrls.map((imagelink, index) => (
             <div key={index} className="image-item">
-              <img src={url} alt={`Generated Content ${index}`} />
+              <img src={imagelink} alt={`Generated Content ${index}`} />
             </div>
           ))
         ) : (
