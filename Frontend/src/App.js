@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import LogInPage from './components/LoginPage';
 import ControlPanel from './components/ControlPanel';
 import ViewGeneratedImages from './components/ViewGeneratedImages'; 
 import ImageDisplay from './components/ImageDisplay'; 
@@ -20,9 +21,11 @@ function App() {
             <ControlPanel setGeneratedImageUrl={setGeneratedImageUrl} setFutureLink={setFutureLink} />
             <ImageDisplay generatedImageUrl={generatedImageUrl} futureLink={futureLink} />
           </div>
+        
         } />
         <Route path="/view-generated-images" element={<ViewGeneratedImages />} />
-        {/* Define other routes as needed */}
+        <Route path="/login" element={<LogInPage />} />
+        <Route path="/logout" element={<LogInPage />} />
       </Routes>
     </Router>
   );
