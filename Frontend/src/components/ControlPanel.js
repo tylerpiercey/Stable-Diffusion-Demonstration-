@@ -77,30 +77,6 @@ function ControlPanel({ setGeneratedImageUrl, setFutureLink }) {
                     />
                 </Form.Group>
 
-                {/* Slider for Batch Count */}
-                <Form.Group className="mb-3">
-                    <Form.Label>Batch Count: {batchCount}</Form.Label>
-                    <Form.Control
-                        type="range"
-                        value={batchCount}
-                        onChange={(e) => setBatchCount(e.target.value)}
-                        min={1}
-                        max={10}
-                    />
-                </Form.Group>
-
-                {/* Slider for Batch Size */}
-                <Form.Group className="mb-3">
-                    <Form.Label>Batch Size: {batchSize}</Form.Label>
-                    <Form.Control
-                        type="range"
-                        value={batchSize}
-                        onChange={(e) => setBatchSize(e.target.value)}
-                        min={1}
-                        max={5}
-                    />
-                </Form.Group>
-
                 {/* Slider for CFG Scale */}
                 <Form.Group className="mb-3">
                     <Form.Label>CFG Scale: {cfgScale}</Form.Label>

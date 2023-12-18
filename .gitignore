@@ -8,3 +8,5 @@ Frontend/.env
 /Backend/.idea/Backend.iml
 /Backend/.idea/modules.xml
 /Backend/.idea/vcs.xml
+/Backend/Build
+/Frontend/Build

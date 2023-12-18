@@ -25,6 +25,7 @@ function App() {
         } />
         <Route path="/view-generated-images" element={<ViewGeneratedImages />} />
         <Route path="/login" element={<LogInPage />} />
+        <Route path="/logout" element={<LogInPage />} />
       </Routes>
     </Router>
   );
