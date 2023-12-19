@@ -15,7 +15,7 @@ const ImageDisplay = ({ generatedImageUrl, futureLink }) => {
 
   const onSave = async (imageUrl) => {
     try {
-      const response = await fetch('http://localhost:3001/api/saveimage/', {
+      const response = await fetch('/api/saveimage/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

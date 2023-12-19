@@ -12,7 +12,7 @@ const LogInPage = () => {
     useEffect(() => {
         const loadOauthUrl = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/google/oauthURL');
+                const response = await axios.get('/api/google/oauthURL');
                 const { url } = response.data;
                 setGoogleOauthUrl(url);
             } catch (e) {
